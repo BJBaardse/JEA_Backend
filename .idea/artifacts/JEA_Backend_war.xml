@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="JEA_Backend:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="JEA_Backend.war">
+      <element id="artifact" artifact-name="JEA_Backend:war exploded" />
+    </root>
+  </artifact>
+</component>
