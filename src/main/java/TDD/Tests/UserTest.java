@@ -1,6 +1,6 @@
 package TDD.Tests;
 
-import TDD.models.User;
+import model.User;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.junit.Rule;
