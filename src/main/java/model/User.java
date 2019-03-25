@@ -1,6 +1,10 @@
 package model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @NamedQueries({
@@ -13,8 +17,19 @@ public class User {
     @Id
     @GeneratedValue
     private long GebruikersiD;
+
+    @NotNull(message = "Username cannot be null")
     private String UserName;
+
+    @NotNull(message = "Username cannot be null")
     private String PassWd;
+
+    @Email(message = "Email should be valid")
+    private String Email;
+
+    @Min(value = 18, message = "Age should not be less than 18")
+    @Max(value = 150, message = "Age should not be greater than 150")
+    private int Age;
 
     public User() {
     }
@@ -22,6 +37,13 @@ public class User {
     public User(String name, String lastName) {
         this.UserName = name;
         this.PassWd = lastName;
+    }
+
+    public User(String name, String lastName, String email, int age) {
+        this.UserName = name;
+        this.PassWd = lastName;
+        this.Email = email;
+        this.Age = age;
     }
 
     public String getUserName() {
@@ -38,5 +60,13 @@ public class User {
 
     public void setPassWd(String passWd) {
         this.PassWd = passWd;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        this.Email = email;
     }
 }
