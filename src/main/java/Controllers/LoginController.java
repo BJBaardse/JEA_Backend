@@ -14,15 +14,12 @@ import java.io.IOException;
 @WebServlet( name="loginServlet", displayName="loginServlet", urlPatterns = {"/login"}, loadOnStartup=1)
 public class LoginController extends HttpServlet {
 
-    @EJB
-    UserDao userDao;
+//    @EJB
+//    UserDao userDao;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        long personid = Integer.parseInt(req.getParameter("username"));
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        this.userDao.save(new User(username, password));
 
         try {
             req.setAttribute("loggedinuser", "Pieter");

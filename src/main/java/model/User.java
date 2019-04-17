@@ -1,5 +1,7 @@
 package model;
 
+import jwt.Role;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
@@ -9,19 +11,69 @@ import javax.validation.constraints.NotNull;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "User.findOne", query = "select u from User u where u.id = :id"),
-        @NamedQuery(name = "User.getAll", query = "select u from User u")
+        @NamedQuery(name = "User.getAll", query = "select u from User u"),
+        @NamedQuery(name = "User.checkcreds", query = "select u from User u where u.UserName = :username and u.PassWd = :password")
 }
 )
 public class User {
 
+    public long getGebruikersiD() {
+        return GebruikersiD;
+    }
+
+    public void setGebruikersiD(long gebruikersiD) {
+        GebruikersiD = gebruikersiD;
+    }
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
+
+    public String getPassWd() {
+        return PassWd;
+    }
+
+    public void setPassWd(String passWd) {
+        PassWd = passWd;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public int getAge() {
+        return Age;
+    }
+
+    public void setAge(int age) {
+        Age = age;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long GebruikersiD;
 
     @NotNull(message = "Username cannot be null")
+    @Column(unique = true)
     private String UserName;
 
-    @NotNull(message = "Username cannot be null")
+    @NotNull(message = "Password cannot be null")
     private String PassWd;
 
     @Email(message = "Email should be valid")
@@ -31,6 +83,8 @@ public class User {
     @Max(value = 150, message = "Age should not be greater than 150")
     private int Age;
 
+    private Role role;
+
     public User() {
     }
 
@@ -39,34 +93,23 @@ public class User {
         this.PassWd = lastName;
     }
 
-    public User(String name, String lastName, String email, int age) {
+    public User(String name, String lastName, String email, int age, Role role) {
         this.UserName = name;
         this.PassWd = lastName;
         this.Email = email;
         this.Age = age;
+        this.role = role;
     }
 
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String userName) {
-        this.UserName = userName;
-    }
-
-    public String getPassWd() {
-        return PassWd;
-    }
-
-    public void setPassWd(String passWd) {
-        this.PassWd = passWd;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        this.Email = email;
+    @Override
+    public String toString() {
+        return "User{" +
+                "GebruikersiD=" + GebruikersiD +
+                ", UserName='" + UserName + '\'' +
+                ", PassWd='" + PassWd + '\'' +
+                ", Email='" + Email + '\'' +
+                ", Age=" + Age +
+                ", role=" + role +
+                '}';
     }
 }

@@ -10,6 +10,7 @@ import javax.annotation.security.RolesAllowed;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 
@@ -21,21 +22,21 @@ public class UserResource {
     public UserDao userDao;
 
     @GET
-    @RolesAllowed("a")
+//    @RolesAllowed("a")
     @Produces("application/json")
     public List<User> all() {
         return userDao.getAll();
     }
 
     @POST
-    @RolesAllowed("a")
-    @Consumes("application/json")
+//    @RolesAllowed("a")
+    @Produces("application/json")
     public void save(User user) {
         userDao.save(user);
     }
 
     @PUT
-    @RolesAllowed("a")
+//    @RolesAllowed("a")
     @Consumes("application/json")
     public void update(User user) {
         userDao.update(user);
@@ -43,7 +44,7 @@ public class UserResource {
 
     @DELETE
     @Path("/{GebruikersiD}")
-    @RolesAllowed("a")
+//    @RolesAllowed("a")
     @Consumes("application/json")
     public void delete(@PathParam("GebruikersiD") Long id) {
         User user = userDao.find(id);
