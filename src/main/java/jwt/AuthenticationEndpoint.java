@@ -23,7 +23,6 @@ public class AuthenticationEndpoint {
                                      @FormParam("password") String password) {
 
         try {
-
             // Authenticate the user using the credentials provided
             User user = authenticate(username, password);
 
@@ -52,7 +51,7 @@ public class AuthenticationEndpoint {
         try {
             Algorithm algorithm = Algorithm.HMAC256("front-endGeeftMijStoring");
             String token = JWT.create()
-                    .withIssuer("Joey")
+                    .withIssuer(user.getUserName())
                     .withClaim("username",user.getUserName())
                     .withClaim("ID",user.getGebruikersiD())
                     .withClaim("Roles" , String.valueOf(user.getRole()))

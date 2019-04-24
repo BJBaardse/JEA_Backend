@@ -7,6 +7,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -15,7 +18,7 @@ import javax.validation.constraints.NotNull;
         @NamedQuery(name = "User.checkcreds", query = "select u from User u where u.UserName = :username and u.PassWd = :password")
 }
 )
-public class User {
+public class User implements Serializable{
 
     public long getGebruikersiD() {
         return GebruikersiD;
@@ -85,6 +88,18 @@ public class User {
 
     private Role role;
 
+    @OneToMany(mappedBy = "user")
+//    @JoinColumn(name = "advertentie_id", referencedColumnName = "advertentie_id")
+    private List<Advertentie> advertenties;
+
+    public List<Advertentie> getAdvertenties() {
+        return advertenties;
+    }
+
+    public User setAdvertentie(List<Advertentie> advertenties) {
+        this.advertenties = advertenties;
+        return this;
+    }
     public User() {
     }
 
