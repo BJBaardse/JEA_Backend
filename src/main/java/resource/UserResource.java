@@ -3,6 +3,16 @@ package resource;
 import model.User;
 import model.UserDao;
 
+import jwt.*;
+import jwt.Role;
+
+
+import javax.ejb.EJB;
+import javax.ws.rs.*;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.MediaType;
+import java.util.List;
+
 
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 
@@ -49,5 +59,13 @@ public class UserResource {
     public void delete(@PathParam("GebruikersiD") Long id) {
         User user = userDao.find(id);
         userDao.delete(user);
+    }
+
+    @GET
+    @Path("/keys")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces("application/json")
+    public String generateAuthkey(ContainerRequestContext requestContext){
+        return userDao.generateAuthKey(requestContext);
     }
 }

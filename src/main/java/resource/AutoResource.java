@@ -1,5 +1,6 @@
 package resource;
 
+import jwt.Role;
 import model.Auto;
 import model.AutoDao;
 import model.User;

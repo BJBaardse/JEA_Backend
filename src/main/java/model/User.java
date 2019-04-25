@@ -88,6 +88,16 @@ public class User implements Serializable{
 
     private Role role;
 
+    public String getAuthenticationKey() {
+        return AuthenticationKey;
+    }
+
+    public void setAuthenticationKey(String authenticationKey) {
+        AuthenticationKey = authenticationKey;
+    }
+
+    private String AuthenticationKey;
+
     @OneToMany(mappedBy = "user")
 //    @JoinColumn(name = "advertentie_id", referencedColumnName = "advertentie_id")
     private List<Advertentie> advertenties;
