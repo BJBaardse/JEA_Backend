@@ -39,6 +39,9 @@ public class Auto implements Serializable{
     @Column(name = "carroserie")
     private Carroserie carroserie;
 
+    @Column(name = "bouwjaar")
+    private int Bouwjaar;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "advertentie_id", referencedColumnName = "advertentie_id")
     private Advertentie advertentie;
@@ -55,7 +58,7 @@ public class Auto implements Serializable{
     public Auto() {
 
     }
-    public Auto(String merk, String model, String kenteken, double prijs, Carroserie carroserie){
+    public Auto(String merk, String model, String kenteken, double prijs, Carroserie carroserie, int bouwjaar){
 
 
 
@@ -115,5 +118,13 @@ public class Auto implements Serializable{
     @Override
     public String toString() {
         return id + " " + Merk + " " + Model + " " + Kenteken + " " + Prijs + " " + carroserie;
+    }
+
+    public int getBouwjaar() {
+        return Bouwjaar;
+    }
+
+    public void setBouwjaar(int bouwjaar) {
+        Bouwjaar = bouwjaar;
     }
 }

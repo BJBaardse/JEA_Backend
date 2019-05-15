@@ -1,6 +1,6 @@
 package model;
 
-import Interceptor.*;
+import Interceptors.*;
 
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless
-@Interceptors(TracingInterceptor.class)
+@Interceptors(UserInterceptor.class)
 public class AutoDao {
 
     @PersistenceContext (unitName = "PayaraPool")

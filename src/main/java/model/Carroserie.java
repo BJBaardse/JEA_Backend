@@ -2,7 +2,7 @@ package model;
 
 public enum Carroserie {
     Hatchback,
-    Carbrio,
+    Cabrio,
     Coupé,
     SUV,
     Offroad,

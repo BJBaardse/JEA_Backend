@@ -1,6 +1,6 @@
 package model;
 
-import Interceptor.*;
+import Interceptors.*;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
@@ -17,7 +17,7 @@ import com.warrenstrange.googleauth.GoogleAuthenticator;
 import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
 
 @Stateless
-@Interceptors(TracingInterceptor.class)
+@Interceptors(UserInterceptor.class)
 public class UserDao {
 
     @PersistenceContext (unitName = "PayaraPool")
@@ -35,6 +35,13 @@ public class UserDao {
         return entityManager.createNamedQuery("User.checkcreds", User.class).setParameter("username", username).setParameter("password",password).getSingleResult(); //throwt exception als meer dan 1 row
     }
 
+    public User GetUserID(long ID){
+
+        User u =entityManager.createNamedQuery("id", User.class).setParameter("id", ID).getSingleResult();
+
+        return u;
+    }
+
     public void save(User user) {
         entityManager.persist(user);
     }
@@ -46,6 +53,7 @@ public class UserDao {
     public void delete(User user) {
         entityManager.remove(user);
     }
+
 
     public String generateAuthKey(ContainerRequestContext requestContext){
         Claims claims = null;

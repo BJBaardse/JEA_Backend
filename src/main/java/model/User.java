@@ -1,6 +1,8 @@
 package model;
 
 import jwt.Role;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -86,7 +88,9 @@ public class User implements Serializable{
     @Max(value = 150, message = "Age should not be greater than 150")
     private int Age;
 
+
     private Role role;
+
 
     public String getAuthenticationKey() {
         return AuthenticationKey;
@@ -99,7 +103,6 @@ public class User implements Serializable{
     private String AuthenticationKey;
 
     @OneToMany(mappedBy = "user")
-//    @JoinColumn(name = "advertentie_id", referencedColumnName = "advertentie_id")
     private List<Advertentie> advertenties;
 
     public List<Advertentie> getAdvertenties() {

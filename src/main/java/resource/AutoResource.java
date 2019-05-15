@@ -1,10 +1,7 @@
 package resource;
 
 import jwt.Role;
-import model.Auto;
-import model.AutoDao;
-import model.User;
-import model.UserDao;
+import model.*;
 
 
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
@@ -14,6 +11,8 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -24,6 +23,14 @@ public class AutoResource {
     @EJB
     public AutoDao autoDao;
 
+//    @GET
+////    @RolesAllowed("a")
+//    @Produces("application/json")
+//    public List<Auto> all() {
+//        return autoDao.getAll();
+//    }
+
+    @Path("/all")
     @GET
 //    @RolesAllowed("a")
     @Produces("application/json")
@@ -52,5 +59,14 @@ public class AutoResource {
     public void delete(@PathParam("auto_id") Long id) {
         Auto auto = autoDao.find(id);
         autoDao.delete(auto);
+    }
+
+    @Path("carroserie")
+    @GET
+    @Produces("application/json")
+    public List<Carroserie> Carroserie(){
+        List<Carroserie> carroseries = new ArrayList<>(Arrays.asList(Carroserie.Bedrijfswagen,Carroserie.Coupé, Carroserie.Hatchback, Carroserie.MPV, Carroserie.Offroad, Carroserie.PickUp, Carroserie.Stationwagen, Carroserie.Cabrio, Carroserie.Sedan, Carroserie.SUV, Carroserie.Overige));
+        return carroseries;
+
     }
 }

@@ -1,16 +1,19 @@
 package resource;
 
+import model.Carroserie;
 import model.User;
 import model.UserDao;
 
 import jwt.*;
 import jwt.Role;
 
-
+//wat zeg maar raar is, is dat ie iets zegt over persondao terwijl daar niks van is
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -31,6 +34,16 @@ public class UserResource {
     @EJB
     public UserDao userDao;
 
+    @EJB
+    User user;
+
+    @GET
+    @Produces("application/json")
+    public User getById(long id){
+        return userDao.GetUserID(id);
+    }
+
+    @Path("/All")
     @GET
 //    @RolesAllowed("a")
     @Produces("application/json")
@@ -68,4 +81,6 @@ public class UserResource {
     public String generateAuthkey(ContainerRequestContext requestContext){
         return userDao.generateAuthKey(requestContext);
     }
+
+
 }
